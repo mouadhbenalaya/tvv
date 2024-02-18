@@ -1,0 +1,121 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "Set of developed components and tools to speed up and standardize our development process",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Mouadh Ben Alaya",
+            "email": "m.alaya-c@tamkeentech.sa"
+        },
+        {
+            "name": "Kristijan Jezidzic",
+            "email": "kristijan.jezidzic@q.agency"
+        },
+        {
+            "name": "Ivan Krsnik",
+            "email": "ivan.krsnik@q.agency"
+        },
+        {
+            "name": "Tomas Martincic",
+            "email": "tomas.martincic@q.agency"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "ext-json": "*",
+        "aws/aws-sdk-php": "^3.294",
+        "darkaonline/l5-swagger": "^8.5",
+        "guzzlehttp/guzzle": "^7.8",
+        "laravel/framework": "^10.31",
+        "laravel/sanctum": "^3.2",
+        "laravel/telescope": "^4.17",
+        "laravel/tinker": "^2.8",
+        "psr/log": "2.0.0",
+        "sentry/sentry-laravel": "^3.8",
+        "spatie/laravel-permission": "^6.0",
+        "spatie/laravel-sluggable": "^3.5"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
+        "captainhook/captainhook": "^5.11",
+        "fakerphp/faker": "^1.20",
+        "friendsofphp/php-cs-fixer": "^3.38",
+        "glhd/laravel-dumper": "^1.1",
+        "laravel/sail": "^1.16",
+        "mockery/mockery": "^1.5",
+        "nunomaduro/collision": "^7.0",
+        "nunomaduro/larastan": "^2.6",
+        "nunomaduro/phpinsights": "^2.6",
+        "phpunit/phpunit": "^10.4",
+        "spatie/laravel-ignition": "^2.3",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Module\\": "modules",
+            "Database\\Factories\\": "database/factories",
+            "Database\\Seeders\\": "database/seeders"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "vendor/bin/captainhook install -f -s"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "cs-fixer-dry-run": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix -v --config=.php-cs-fixer.php --dry-run",
+        "cs-fixer-fix": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix -v --config=.php-cs-fixer.php",
+        "phpstan": "vendor/bin/phpstan analyse app --no-progress --memory-limit=2G",
+        "install-ci": [
+            "@composer install",
+            "@php -r \"file_exists('.env') || copy('.env.dev', '.env');\"",
+            "@php artisan key:generate"
+        ],
+        "install-dev": [
+            "@composer install",
+            "@php -r \"file_exists('.env') || copy('.env.dev', '.env');\"",
+            "@php artisan key:generate",
+            "vendor/bin/sail up -d"
+        ],
+        "test": [
+            "vendor/bin/sail up -d",
+            "vendor/bin/sail test"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "platform-check": false,
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "platform": {
+            "php": "8.3"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": false
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,0 +1,22 @@
+# Local development
+.env
+.env.backup
+
+.idea
+.vscode
+.php-cs-fixer.cache
+docker-compose.yml
+.local/docker-compose.yml
+
+# PHP General
+vendor/
+node_modules/
+public/hot
+public/storage
+storage/*.key
+storage/api-docs
+storage/clockwork
+storage/clockwork/index
+
+# Testing
+.phpunit.result.cache
